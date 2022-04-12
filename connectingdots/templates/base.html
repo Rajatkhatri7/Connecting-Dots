@@ -34,109 +34,28 @@
 
 <body>
   <!-- header start-->
-  <header class="header ">
-    <div class="container">
-      <div class="row ">
-        <div class="col-md-6 header-info">
-          <a href="mailto:info@ytubers.com" class="mr-3">info@ytubers.com</a>
-          <span>Call at: +91 9898989898 </span>
-        </div>
-        <div class="header-buttons col-md-6 d-flex justify-content-end">
-          <a class="btn btn-accent mr-3" href="/login.html">Signin</a>
-          <a class="btn btn-accent " href="/register.html">SignUp</a>
-        </div>
-      </div>
-    </div>
-  </header>
+  {% include "includes/header.html" %}
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="/index.html">
-        <img src="{% static './assets/images/Studio_Project.png' %}"  alt="" width="325" height="60" alt="" loading="lazy"> 
-        
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/aboutus.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/tubers.html">Tubers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contactus.html">Contact</a>
-          </li>
 
-        </ul>
-      </div>
-    </div>
-  </nav>
+
+  <!-- Navbar starts here -->
+
+  {% include "includes/navbar.html" %}
+
+  <!-- Navbar ends here -->
+
+
+  
   <!-- header end -->
  
   {% block content %}
 
 
-
-
-
-
   {% endblock %}
 
   <!-- footer -->
-  <footer>
-    <div class="bg-accent mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6 text-lg-left text-center">
-            <h4>
-              Reach out to hire YTubers
-            </h4>
-          </div>
+  {% include "includes/footer.html" %}
 
-          <div class="col-sm-6 text-lg-right text-center">
-            <button class="btn btn-light">
-              Contact Us
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 text-lg-left text-center">
-          <h5>
-            2020 YTubers for Hire
-          </h5>
-        </div>
-        <div class="col-md-4 text-lg-center text-center">
-          <h5>
-            All Rights Reserved
-          </h5>
-        </div>
-        <div class="col-md-4 text-lg-right text-center">
-          <div>
-
-            <button class="btn btn-accent"> <i class="fab fa-facebook-f fa-lg	"></i> </button>
-            <button class="btn btn-accent"> <i class="fab fa-instagram fa-lg	"></i> </button>
-            <button class="btn btn-accent"> <i class="fab fa-twitter fa-lg	"></i> </button>
-            <button class="btn btn-accent"> <i class="fab fa-youtube fa-lg	"></i> </button>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </footer>
   <!-- footer ends -->
 
   <!-- scripts -->
