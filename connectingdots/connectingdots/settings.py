@@ -31,6 +31,19 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+from django.contrib.messages import constants as messages
+
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
+
+
+
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
@@ -39,7 +52,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+
 ]
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4' #add the Bootstrap template pack
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
