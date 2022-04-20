@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from multiprocessing.connection import Client
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -77,7 +78,13 @@ WSGI_APPLICATION = 'connectingdots.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'authentication',
+        'NAME': 'authentication_db',
+        'CLIENT':{
+
+            'host':'mongodb://rootuser:rootpass@localhost:27017/',
+
+
+        }
     }
 }
 
