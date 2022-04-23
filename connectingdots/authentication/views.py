@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -57,20 +58,23 @@ def login(request):
             messages.warning(request,'invalid credentials')
             return redirect('login')
             
-    
-    messages.warning(request,'something went wrong')
 
     return render(request,'authentication/login.html')
 
 
 def logout_user(request):
-    logout(request)
+    auth.logout(request)
     return redirect('home')
 
+@login_required(login_url='login')
 def dashboard(request):
     return render(request, 'authentication/dashboard.html')
 
 
+
+
+
+#testing authentication
 from django.shortcuts import  render, redirect
 from .forms import NewUserForm
 from django.contrib import messages
