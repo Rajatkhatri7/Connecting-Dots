@@ -3,7 +3,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from django.contrib.auth.forms import AuthenticationForm 
-from django.contrib.auth import login, authenticate 
 
 
 # Create your views here.
@@ -44,19 +43,22 @@ def signup(request):
 
 def login(request):
     if request.method =='POST':
-        username= request.POST['username']
-        password= request.POST['password']
+        username = request.POST['username']
+        password = request.POST['password']
 
-        user=auth.authenticate(username=username, password=password)
+
+        user = auth.authenticate(username=username, password=password)
+
         if user is not None:
-            login(request = request,user = user)
+            auth.login(request = request,user = user)
             messages.info(request, f"You are now logged in as {username}.")
-
-            # messages.warning(request,'logged in')
             return redirect('home')
         else:
             messages.warning(request,'invalid credentials')
             return redirect('login')
+            
+    
+    messages.warning(request,'something went wrong')
 
     return render(request,'authentication/login.html')
 
@@ -79,13 +81,14 @@ def login_request(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
+            user = auth.authenticate(username=username, password=password)
             if user is not None:
-                login(request = request, user=user)
+                auth.login(request = request, user=user)
                 messages.info(request, f"You are now logged in as {username}.")
                 return redirect("home")
             else:
                 messages.error(request, "Invalid username or password.")
+                return redirect("login_request")
                 
         else:
             messages.error(request, "Invalid username or password.")
