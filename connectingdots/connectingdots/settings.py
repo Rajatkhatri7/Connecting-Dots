@@ -42,9 +42,8 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
  }
 
-
-
 INSTALLED_APPS = [
+    'aiservices.apps.AiservicesConfig',
     'authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
