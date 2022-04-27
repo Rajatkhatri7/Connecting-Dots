@@ -44,6 +44,7 @@ MESSAGE_TAGS = {
 
 INSTALLED_APPS = [
     'aiservices.apps.AiservicesConfig',
+    'fileconversion.apps.FileconversionConfig',
     'authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
