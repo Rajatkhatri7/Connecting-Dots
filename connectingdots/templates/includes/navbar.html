@@ -24,12 +24,15 @@
           </li>
 
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Services
+            <button class="btn btn-accent dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+
+            Services
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{% url 'fileconversion' %}">FILE CONVERSIOINS</a>
-              <a class="dropdown-item" href="{% url 'aiservices' %}">AI SERVICES</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+              <a class="btn btn-primary dropdown-item" href="{% url 'fileconversion' %}">FILE CONVERSIOINS</a>
+              <a class="btn btn-primary  dropdown-item" href="{% url 'aiservices' %}">AI SERVICES</a>
             </div>
           </div>
 

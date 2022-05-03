@@ -8,12 +8,39 @@ from PIL import Image
 # Create your views here.
 
 
+from .algorithms.scoring import scoring_algorithm
+from .algorithms.frequency import extraction, frequency_algorithm
+
+
 def aiservices(request):
     return render(request, 'aiservices/aiservices.html')
 
 
 def summarization(request):
-    return render(request, 'aiservices/summarization.html')
+    url = request.GET.get('url')
+    long_text = request.GET.get('long-text')
+    # sentence_no = int(request.GET.get('number'))
+    sentence_no = 7
+    algorithm = request.GET.get('algorithm')
+    result_list = []
+
+    if url:
+        long_text = extraction.extract(url)  # text extraction using BS
+        original_text = url
+    else:
+        original_text = long_text
+
+    if algorithm == '1':
+        result_list = scoring_algorithm.scoring_main(long_text, sentence_no)
+    elif algorithm == '2':
+        result_list = frequency_algorithm.frequency_main(long_text, sentence_no)
+
+    summary = ' '.join(result_list)
+
+    context = {'data': summary, 'original_text': original_text}
+
+
+    return render(request, 'aiservices/summarization.html',context)
 
 
 def extraction(request):
