@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-sm-6">
+        {% if original_text %}
+            <h3>Original Text/URL</h3>
+            {{ original_text }}
+        {% else %}
+             {% include 'aiservices/summarization.html' %}
+        
+        {% endif %}
+    </div>
+
+    <div class="col-sm-6">
+
+        
+
+    {% if data %}
+    
+
+            
+    <h3>Summary</h3>
+    {#    <ul>#}
+    {#        {% for list in data %}#}
+    {##}
+    {#            <li> {{ list }} </li>#}
+    {##}
+    {#        {% endfor %}#}
+    {#    </ul>#}
+    <p>{{ data }}</p>
+    
+    {% endif %} 
+
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -70,7 +70,19 @@
   <script src="{% static './copy.js' %}"></script>
   <script src="{% static './error.js' %}"></script>
 
+  <script>
+  
+  function validateInputForm() {
+    let url = document.forms["inputForm"]["url"].value;
+    let text = document.forms["inputForm"]["long-text"].value;
+    let regexp = new RegExp("\s");
+    if (url === '' && !regexp.test(text)) {
+        document.getElementById("warning").innerHTML = "Both of the fields are empty!";
+        return false;
+    }
+}
 
+</script>
   <!-- scripts -->
 
 </body>

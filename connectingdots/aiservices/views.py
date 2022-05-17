@@ -4,6 +4,8 @@ import base64
 import pytesseract
 from django.contrib import messages
 from PIL import Image
+import cv2
+import numpy as np
 
 # Create your views here.
 
@@ -17,30 +19,31 @@ def aiservices(request):
 
 
 def summarization(request):
-    url = request.GET.get('url')
-    long_text = request.GET.get('long-text')
-    # sentence_no = int(request.GET.get('number'))
-    sentence_no = 7
-    algorithm = request.GET.get('algorithm')
+    req_url = request.POST.get('url')
+    long_text = request.POST.get('long-text')
+    sentence_no = request.POST.get('number')
+    
+    algorithm = request.POST.get('algorithm')
     result_list = []
 
-    if url:
-        long_text = extraction.extract(url)  # text extraction using BS
-        original_text = url
+    if req_url:
+        long_text = extraction.extract(req_url)  # text extraction using BS
+        original_text = req_url
     else:
         original_text = long_text
 
     if algorithm == '1':
-        result_list = scoring_algorithm.scoring_main(long_text, sentence_no)
+        result_list = scoring_algorithm.scoring_main(long_text, int(sentence_no))
     elif algorithm == '2':
-        result_list = frequency_algorithm.frequency_main(long_text, sentence_no)
+        result_list = frequency_algorithm.frequency_main(long_text, int(sentence_no))
 
     summary = ' '.join(result_list)
+    
 
     context = {'data': summary, 'original_text': original_text}
 
 
-    return render(request, 'aiservices/summarization.html',context)
+    return render(request, 'aiservices/summerization_home.html',context)
 
 
 def extraction(request):
@@ -55,10 +58,25 @@ def extraction(request):
             messages.add_message(
                 request, messages.ERROR, "No image selected or uploaded"
             )
-            return render(request, "home.html")
+            return render(request, "aiservices/extraction.html")
         lang = request.POST["language"]
-        img = Image.open(image)
-        text = pytesseract.image_to_string(img, lang=lang)
+
+        pil_img = Image.open(image)
+
+        img = np.array(pil_img , dtype = np.uint8)
+        img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+
+
+        # img_gray  = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
+
+        #adaptive thresholding
+        # thresh = cv2.adaptiveThreshold(img_gray, 250, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 11)
+
+        # adaptive thresholding
+        # cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+
+        # img = Image.open(image)
+        text = pytesseract.image_to_string(img_gray, lang=lang)
         # return text to html
         return render(request, 'aiservices/extraction.html', {"ocr": text, "image": image_base64})
 
