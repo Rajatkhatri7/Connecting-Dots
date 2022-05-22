@@ -61,6 +61,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4' #add the Bootstrap template pack
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
 
+PDF_OUTPUT_FILES_URL = 'pdf_files'
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

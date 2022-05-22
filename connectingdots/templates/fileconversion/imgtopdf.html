@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+    
+{% include 'includes/messages.html' %}
+
+
+        {% if imgnaem %}
+        
+            <p>Images converted successfully</p>
+        
+    {% else %}
+        <p>No images.</p>
+    {% endif %}
+<form action="{% url 'imgtopdf' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <p>{{ form.non_field_errors }}</p>
+    <p>{{ form.image_file.label_tag }} {{ form.image_file.help_text }}</p>
+    <p>
+        {{form.image_file}}
+        {{ imgname }}
+    </p>
+    <p><input type="submit" value="Upload" /></p>
+</form>
+
+</body>
+
+
+{% endblock %}

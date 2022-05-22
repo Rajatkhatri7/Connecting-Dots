@@ -7,9 +7,6 @@ from PIL import Image
 import cv2
 import numpy as np
 
-# Create your views here.
-
-
 from .algorithms.scoring import scoring_algorithm
 from .algorithms.frequency import extraction, frequency_algorithm
 

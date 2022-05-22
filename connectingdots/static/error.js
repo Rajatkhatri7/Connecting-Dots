@@ -3,3 +3,5 @@ setTimeout(function () {
     // hide modal after 3 seconds
     modal.style.display = "none";
 }, 2800);
+
+
