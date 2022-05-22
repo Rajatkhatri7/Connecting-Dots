@@ -8,7 +8,7 @@
 
 <main class="tubers-page">
   <div class="banner">
-    <img src="./assets/images/bg-banner.png" alt="" class="img-fluid w-100">
+    <img src="{% static './assets/images/banner.jpeg' %}" alt="" class="img-fluid w-100">
     <h1 class="text-center">
       File conversion
     </h1>
@@ -24,14 +24,15 @@
             <!-- person 1 -->
             <div class="card border-0 text-center">
               <div class="feature-text">
-                <img src="https://placeimg.com/640/480/tech" class="card-img-top" alt="team-member">
+                <img src="{% static './assets/images/pdftojpg.png' %}" class="card-img-top" alt="team-member">
                 <span class="text-left bg-accent font-weight-bold">
                   Featured
                 </span>
               </div>
               <div class="card-body">
                 <h5 class="card-title">Pdf2Img </h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, beatae! Sit nesciunt alias accusantium necessitatibus id! Repudiandae autem libero rerum, cum, blanditiis facere vel repellendus iusto iste ut nesciunt est?</p>
+                <p class="card-text">Convert PDF to Image free and get access to a suite of other useful conversion tools, all
+                  while keeping your data safe and secure. </p>
                 <div class="person-description mt-2">
                   <button class="btn btn-accent"><a href="{%url 'pdftoimg' %}"> try it</a></button>
                  

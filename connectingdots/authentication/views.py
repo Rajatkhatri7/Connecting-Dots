@@ -5,6 +5,16 @@ from django.contrib import messages, auth
 from django.contrib.auth.forms import AuthenticationForm 
 from django.contrib.auth.decorators import login_required
 
+import smtplib
+import subprocess
+import os
+import ast
+import json
+import argparse
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email import encoders
+from email.mime.base import MIMEBase
 
 # Create your views here.
 
@@ -14,6 +24,50 @@ def about(request):
     return render(request, 'authentication/aboutus.html')
 
 def contact(request):
+
+    if request.method == 'POST':
+
+    
+        req_name = request.POST.get('firstname')
+        req_number = request.POST.get('number')
+        req_subject = request.POST.get('subject')
+        req_mail= request.POST.get('email')
+        
+        req_message = request.POST.get('message')
+
+
+        print(req_mail)
+    
+        result_list = []
+    
+        emailMsg = "Name: " + req_name + "\n" + "Number: " + req_number + "\n" + "Subject: " + req_subject + "\n" + "Email: " + req_mail + "\n" + "Message: " + req_message + "\n"
+    
+            
+        mimeMessage = MIMEMultipart()
+        mimeMessage['to'] = "rajatkhatri0002@gmaiil.com"
+        mimeMessage['from'] = "rajat@sentient.io"
+        mimeMessage['subject'] = req_subject
+        mimeMessage.attach(MIMEText(emailMsg, 'plain'))
+    
+    
+        username = "rajat@sentient.io"
+        password = "foxfylfhdbpkqeud"
+        server = smtplib.SMTP('smtp.gmail.com', 587) 
+        server.ehlo()
+        server.starttls()
+        server.login(username,password)  
+        server.sendmail("rajat@sentient.io", "rajatkhatri0002@gmail.com", mimeMessage.as_string())  
+        server.quit()
+
+        messages.success(request, 'Email sent successfully')
+        return redirect('contact')
+
+    
+    
+
+
+
+
     return render(request, 'authentication/contact.html')
 
 def signup(request):

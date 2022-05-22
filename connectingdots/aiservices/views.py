@@ -8,11 +8,14 @@ import cv2
 import numpy as np
 
 from .algorithms.scoring import scoring_algorithm
-from .algorithms.frequency import extraction, frequency_algorithm
+from .algorithms.frequency import  frequency_algorithm
 
 
 def aiservices(request):
     return render(request, 'aiservices/aiservices.html')
+
+import requests
+from bs4 import BeautifulSoup
 
 
 def summarization(request):
@@ -24,8 +27,19 @@ def summarization(request):
     result_list = []
 
     if req_url:
-        long_text = extraction.extract(req_url)  # text extraction using BS
-        original_text = req_url
+
+        page = requests.get(req_url)
+
+        soup = BeautifulSoup(page.content, 'html.parser')
+        soup_tag = list(filter(lambda p: len(list(p.children)) < 2, soup.find_all(['p', 'div'], class_=None, id=None)))
+        text = ' '.join(map(lambda p: p.text, soup_tag))
+        if text == '':
+            text = 'No Paragraphs Found!'
+        text = text.replace('\xa0', ' ')
+        long_text  = text
+        original_text  = req_url
+
+
     else:
         original_text = long_text
 
