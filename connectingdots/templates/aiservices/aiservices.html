@@ -3,24 +3,87 @@
 {% load static %}
 
 {% block content %}
-<div class="card text-white bg-secondary mb-3 mx-auto" style="max-width: 18rem;">
-    <div class="card-header">Text extraction</div>
+
+<main class="tubers-page">
+  <div class="banner">
+    <img src="{% static './assets/images/ai.jpg'%}" alt="" class="img-fluid w-100">
+    <h1 class="text-center">
+      AI SERVICES
+    </h1>
+  </div>
+
+
+
+
+
+
+  <div class="card text-white bg-secondary mb-3 mx-auto" style="width: 50rem ;align-items:center;">
+    <div class="card-header" style="color: chocolate;">Text extraction</div>
+        <div class="feature-text">
+      <img src="{%static './assets/images/extr.jpeg' %}" class="card-img-top" alt="team-member">
+      <span class="text-left bg-accent font-weight-bold">
+        Featured
+      </span>
+    </div>
+
+    
+    <div class="card-body">
+      <h5 class="card-title" style="font-size: large;">Text extraction</h5>
+      <p class="card-text">Our text summarizer is a free online tool that wraps up a text to a specified short length. It
+        condenses a long article to main points.</p>
+      <div class="person-description mt-2">
+        <button class="btn btn-accent"><a href="{% url 'extraction' %}"> Try it</a> </button>
+       
+      </div>
+     
+    </div>
+  </div>
+
+
+  <div class="card text-white bg-secondary mb-3 mx-auto" style="width: 50rem ;align-items:center;">
+    <div class="card-header" style="color: chocolate;">Text Summerization</div>
+        <div class="feature-text">
+      <img src="{%static './assets/images/txt.jpeg' %}" class="card-img-top" alt="team-member">
+      <span class="text-left bg-accent font-weight-bold">
+        Featured
+      </span>
+    </div>
+
+    
+    <div class="card-body">
+      <h5 class="card-title" style="font-size: large;">Text Summerization</h5>
+      <p class="card-text">Our Text Extractor is a free online OCR tool that converts images into text in no time. It uses optical
+        character recognition (OCR) technology to get the text from images.Performs text detection using OpenCV’s EAST text detector, a highly accurate deep learning text detector used to detect text in natural scene images.
+        Once we have detected the text regions with OpenCV, we’ll then extract each of the text ROIs and pass them into Tesseract, enabling us to build an entire OpenCV OCR pipeline!  </p>
+      <div class="person-description mt-2">
+        <button class="btn btn-accent"><a href="{% url 'summerization_home' %}"> Try it</a> </button>
+       
+      </div>
+     
+    </div>
+  </div>
+
+
+
+<!-- 
+<div class="card text-white bg-secondary mb-3 mx-auto" style="max-width: 18rem ;align-items:center;">
+    <div class="card-header" style="color: chocolate;">Text extraction</div>
     <div class="card-body">
       <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus facere placeat labore ipsam debitis voluptas molestias error earum, quos consequuntur blanditiis cum incidunt eum dolor id rem fugit repellat! Perspiciatis.</h5>
       <p class="card-text"></p>
       <a href="{% url 'extraction' %}" class="btn btn-primary">Try it</a>
 
     </div>
-  </div>
-  <div class="card text-white bg-secondary mb-3 mx-auto" style="max-width: 18rem;">
-    <div class="card-header">Text Summerization</div>
+  </div> -->
+  <!-- <div class="card text-white bg-secondary mb-3 mx-auto" style="max-width: 18rem; align-items:center;">
+    <div class="card-header" style="color: chocolate;">Text Summerization</div>
     <div class="card-body">
       <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus facere placeat labore ipsam debitis voluptas molestias error earum, quos consequuntur blanditiis cum incidunt eum dolor id rem fugit repellat! Perspiciatis.</h5>
       <p class="card-text"></p>
       <a href="{% url 'summerization_home' %}" class="btn btn-primary">Try it</a>
 
     </div>
-  </div>
+  </div> -->
 
  
 

@@ -10,6 +10,7 @@ from fileconversion.extra import ContentTypeRestrictedFileField
 from pdf2image import convert_from_path
 import time
 
+from PIL import Image
 
 def make_upload_path(instance, filename):
     """Generates upload path for FileField"""
@@ -52,3 +53,6 @@ class PdfFile(models.Model):
                 # img.save(filename = output_dir + str(i) + '.' + format)
 
         #remove pages from rootdir
+
+
+ 

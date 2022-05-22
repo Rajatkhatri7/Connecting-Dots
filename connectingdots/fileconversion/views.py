@@ -1,3 +1,4 @@
+import imp
 from urllib import response
 import uuid
 from django.shortcuts import render
@@ -5,10 +6,17 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
+from django.conf import settings
+
+from django.http import FileResponse
+
 
 from PIL import Image
+from django.core.files.storage import FileSystemStorage
 
 
+import base64
+import os
 
 from .forms import PdfUploadForm
 from .models import PdfFile
@@ -30,6 +38,8 @@ def pdftoimg(request):
             # will have the actual size
             new_pdf.convert_to_jpg()
 
+            
+
     else:
         form = PdfUploadForm()
 
@@ -42,35 +52,40 @@ def pdftoimg(request):
         {'pdf_files': pdf_files, 'form': form}
     )
 
+
+import time
+
 def imgtopdf(request):
-    if request.method == 'POST':
-        try: 
+        if request.method == "POST":
+            try:
+                image = request.FILES["imagefile"]
+                   # encode image to base64 string
+                image_base64 = base64.b64encode(image.read()).decode("utf-8")
+            except:
+                messages.add_message(
+                request, messages.ERROR, "No image selected or uploaded"
+                )
+                return render(request, "fileconversion/imgtopdf.html")
 
-            uploaded_file = request.FILES["imagefile"]
-            filename = uploaded_file.name
+            pil_img = Image.open(image)
+            tmp_path = os.path.join(settings.MEDIA_ROOT)
 
-            tmp_path = f'/tmp/{filename}'
-            with open(tmp_path, 'wb') as destination:
-                destination.write(uploaded_file.read())
-
-            pdf_path = f'/tmp/{filename.split(".")[0]}.pdf'
-            image = Image.open(tmp_path)
-            im = image.convert('RGB')
+            pdf_path = 'tmp.pdf'
+            im = pil_img.convert('RGB')
             im.save(pdf_path)
 
             fs = FileSystemStorage(pdf_path)
-            resp = FileResponse(fs.open(pdf_path), content_type='application/pdf')
-            resp['content-Disposition'] = f'attachment; filename="{uuid.uuid4().hex}.pdf"'
+            resp = FileResponse(fs.open(tmp_path), content_type='application/pdf')
+            resp['content-Disposition'] = f'attachment; filename="{pdf_path}"'
+
+            time.sleep(5)
+
+            return resp
 
 
-            return render(request , 'fileconversion/imgtopdf.html', {"imgname":filename,'resp': resp})
-        except:
-            messages.add_message(request, messages.ERROR, "No image selected or uploaded")
-            
-            return render(request, "fileconversion/imgtopdf.html")
         
-    else:
-        return render(request, "fileconversion/imgtopdf.html")
+        else:
+          return render(request, "fileconversion/imgtopdf.html")
 
 def imgcompression(request):
     return render(request, 'fileconversion/imgcompression.html')

@@ -6,27 +6,24 @@
     
 {% include 'includes/messages.html' %}
 
+<div class="container">
+    <div class="buttons">
+        <button  id="upload-btn" onclick="document.getElementById('formFile').click()"
+            class="custom-btn shadow-md mb-2">Upload
+            Img <i class="fi fi-rr-upload"></i>
+        </button>
+        <form action="{% url 'imgtopdf' %}" method="POST" enctype="multipart/form-data" class="flex justify-center">
+            {% csrf_token %}
+            <input  name="imagefile" re accept="image/*" type="file" id="formFile"
+                style="display: none;">
+                <button type="submit" class="custom-btn shadow-md bg-white">Convet to pdf <i
+                    class="fi fi-rr-search"></i></button>
+        </form>
+    </div>
+</div>
 
-        {% if imgnaem %}
-        
-            <p>Images converted successfully</p>
-        
-    {% else %}
-        <p>No images.</p>
-    {% endif %}
-<form action="{% url 'imgtopdf' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
 
-    <p>{{ form.non_field_errors }}</p>
-    <p>{{ form.image_file.label_tag }} {{ form.image_file.help_text }}</p>
-    <p>
-        {{form.image_file}}
-        {{ imgname }}
-    </p>
-    <p><input type="submit" value="Upload" /></p>
-</form>
 
-</body>
 
 
 {% endblock %}

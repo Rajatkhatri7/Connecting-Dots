@@ -6,7 +6,8 @@ class PdfUploadForm(forms.Form):
         label='Select a pdf file',
     )
 
+
 class ImgUploadForm(forms.Form):
     image_file = forms.FileField(
-        label='Select a image file',
+        label='Select an image file',
     )

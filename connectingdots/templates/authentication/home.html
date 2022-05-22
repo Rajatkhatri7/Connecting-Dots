@@ -10,10 +10,8 @@
   <!-- header end -->
   <main class="tubers-page">
     <div class="banner">
-      <img src="./assets/images/bg-banner.png" alt="" class="img-fluid w-100">
-      <h1 class="text-center">
-        HOME
-      </h1>
+      <img src="{% static './assets/images/home.jpeg'%}" alt="" class="img-fluid w-100">
+     
     </div>
 
 
@@ -27,14 +25,15 @@
             <!-- person 1 -->
             <div class="card border-0 text-center">
               <div class="feature-text">
-                <img src="https://placeimg.com/640/480/tech" class="card-img-top" alt="team-member">
+                <img src="{%static './assets/images/txt.jpeg' %}" class="card-img-top" alt="team-member">
                 <span class="text-left bg-accent font-weight-bold">
                   Featured
                 </span>
               </div>
               <div class="card-body">
                 <h5 class="card-title">Text extraction</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, beatae! Sit nesciunt alias accusantium necessitatibus id! Repudiandae autem libero rerum, cum, blanditiis facere vel repellendus iusto iste ut nesciunt est?</p>
+                <p class="card-text">Performs text detection using OpenCV’s EAST text detector, a highly accurate deep learning text detector used to detect text in natural scene images.
+                  Once we have detected the text regions with OpenCV, we’ll then extract each of the text ROIs and pass them into Tesseract, enabling us to build an entire OpenCV OCR pipeline!</p>
                 <div class="person-description mt-2">
                   <button class="btn btn-accent"><a href="{% url 'extraction' %}"> Try it</a> </button>
                  
@@ -45,7 +44,7 @@
             <!-- person 1 -->
             <div class="card border-0 text-center">
               <div class="feature-text">
-                <img src="https://placeimg.com/640/480/tech" class="card-img-top" alt="team-member">
+                <img src="{%static './assets/images/extr.jpeg' %}" class="card-img-top" alt="team-member">
                 <span class="text-left bg-accent font-weight-bold">
                   Featured
                 </span>
@@ -54,7 +53,7 @@
                 <h5 class="card-title">Text Summerization</h5>
                 <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe optio a impedit consequuntur nulla quibusdam, aperiam sequi voluptas odit hic dolorem accusantium doloremque. Adipisci id nihil architecto nostrum dicta nesciunt.</p>
                 <div class="person-description mt-2">
-                  <button class="btn btn-accent"><a href="{% url 'summerization_home' %}"> use it</a></button>
+                  <button class="btn btn-accent"><a href="{% url 'summerization_home' %}"> Try it</a></button>
                   
                 </div>
               </div>
@@ -68,10 +67,11 @@
                 </span>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Service3</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, dolore accusantium error mollitia, soluta ut delectus quo quisquam quas repudiandae natus velit fugit dolorem dolor eligendi fuga nam perspiciatis. Consequuntur!</p>
+                <h5 class="card-title">Pdf to Image Conversion</h5>
+                <p class="card-text">Convert PDF to Image free and get access to a suite of other useful conversion tools, all
+                  while keeping your data safe and secure</p>
                 <div class="person-description mt-2">
-                  <button class="btn btn-accent"> use it </button>
+                  <button class="btn btn-accent"> Try it </button>
                 
                 </div>
               </div>
@@ -85,10 +85,11 @@
                   </span>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">Service2</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, dolore accusantium error mollitia, soluta ut delectus quo quisquam quas repudiandae natus velit fugit dolorem dolor eligendi fuga nam perspiciatis. Consequuntur!</p>
+                  <h5 class="card-title">Image to pdf Conversion</h5>
+                  <p class="card-text">Convert Images to PDF free and get access to a suite of other useful conversion tools, all
+                    while keeping your data safe and secure.!</p>
                   <div class="person-description mt-2">
-                    <button class="btn btn-accent"> use it </button>
+                    <button class="btn btn-accent"> Try it </button>
                   
                   </div>
                 </div>
@@ -101,10 +102,11 @@
                   </span>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">Service2</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, dolore accusantium error mollitia, soluta ut delectus quo quisquam quas repudiandae natus velit fugit dolorem dolor eligendi fuga nam perspiciatis. Consequuntur!</p>
+                  <h5 class="card-title">Merge pdfs</h5>
+                  <p class="card-text">PDF merger is the best solution for combining two or more PDF files for free while keeping
+                    your data safe and secure.</p>
                   <div class="person-description mt-2">
-                    <button class="btn btn-accent"> use it </button>
+                    <button class="btn btn-accent"> Try it </button>
                   
                   </div>
                 </div>
