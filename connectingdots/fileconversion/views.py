@@ -9,8 +9,9 @@ from django.contrib import messages
 from django.conf import settings
 
 from django.http import FileResponse
+from pdf2image import convert_from_path
 
-
+import zipfile
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
 
@@ -25,6 +26,8 @@ from .models import PdfFile
 def fileconversion(request):
     return render(request, 'fileconversion/fileconversion.html')
 
+
+                
 def pdftoimg(request):
 
     if request.method == 'POST':
@@ -36,7 +39,39 @@ def pdftoimg(request):
             # convert to jpg file after uploading
             # if you don't pass parameters then the images
             # will have the actual size
-            new_pdf.convert_to_jpg()
+            # new_pdf.convert_to_jpg()
+
+            filename = new_pdf.pdf_file.name
+            filepath  = os.path.join(settings.MEDIA_ROOT, filename)
+
+            i = 1
+            pages_name = []
+            tmp_path = os.path.join(settings.MEDIA_ROOT)
+
+            pages = convert_from_path(filepath, 200)
+            for p in pages :
+                p.save( "Page_" + str(i) + '.' + "jpg",'JPEG')
+                pages_name.append("Page_" + str(i) + '.' + "jpg")
+                i+=1 
+            
+            
+            with zipfile.ZipFile('images.zip', 'w') as zipf:
+                for page in pages_name:
+
+                    zipf.write(os.path.join(tmp_path, page))
+
+            fs = FileSystemStorage(tmp_path)
+            resp = FileResponse(fs.open("images.zip"), content_type='application/force-download')
+            resp['content-Disposition'] = f'attachment; filename="%s" ' % 'images.zip'
+            time.sleep(5)
+
+
+            for page in pages_name:
+                os.remove(os.path.join(tmp_path, page))
+            os.remove(os.path.join(tmp_path, "images.zip"))
+            os.rmdir(os.path.join(tmp_path,"pdf_files"))
+            return resp
+
 
             
 
@@ -78,7 +113,11 @@ def imgtopdf(request):
             resp = FileResponse(fs.open(tmp_path), content_type='application/pdf')
             resp['content-Disposition'] = f'attachment; filename="{pdf_path}"'
 
+
+
             time.sleep(5)
+
+            os.remove(os.path.join(tmp_path, pdf_path))
 
             return resp
 
@@ -92,5 +131,6 @@ def imgcompression(request):
 
 
 def mergepdf(request):
+    
     return render(request, 'fileconversion/mergepdf.html')
 

@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 
 from .algorithms.scoring import scoring_algorithm
-from .algorithms.frequency import  frequency_algorithm
+from .algorithms.frequency import frequency_algorithm
 
 
 def aiservices(request):
@@ -35,9 +35,8 @@ def summarization(request):
         text = ' '.join(map(lambda p: p.text, soup_tag))
         if text == '':
             text = 'No Paragraphs Found!'
-        text = text.replace('\xa0', ' ')
-        long_text  = text
-        original_text  = req_url
+        original_text = text.replace('\xa0', ' ')
+    
 
 
     else:
