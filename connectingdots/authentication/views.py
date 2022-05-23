@@ -18,6 +18,12 @@ from email.mime.base import MIMEBase
 
 # Create your views here.
 
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+
+
 def home(request):
     return render(request, 'authentication/home.html')
 def about(request):
@@ -128,27 +134,7 @@ def logout_user(request):
 
 
 def forget_password(request):
-    if request=="POST":
-        username = request.POST['username']
-        old_password = request.POST['old_password']
-        new_password = request.POST['new_password']
-        confirm_password = request.POST['confirm_password']
-
-        if new_password == confirm_password:
-            if User.objects.filter(username=username).exists():
-                if User.objects.filter(username=username, password=old_password).exists():
-                    user = User.objects.get(username=username)
-                    user.set_password(new_password)
-                    user.save()
-                    messages.success(request, 'Password changed successfully')
-                    return redirect('login')
-                else:
-                    messages.warning(request, 'Old password is incorrect')
-                    return redirect('forget_password')
-
-            else:
-                messages.warning(request, 'Username does not exist')
-                return redirect('forget_password')
+   
 
     return render(request, 'authentication/forget_password.html')
 
